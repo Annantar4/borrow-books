@@ -1,0 +1,324 @@
+{
+    "openapi":"3.0.0",
+    "info":{
+        "title": "Documentation API Book Borrowing",
+        "version": "1.0.0",
+        "description": "Warning: Make sure it is connected to the MySQL database"
+        
+        
+    },
+    "servers": [{
+        "url" : "http://localhost:5000",
+        "description" : "localhost"
+    }],
+    "tags":[
+        {
+            "name" : "Member",
+            "description" : "Member"
+        },
+        {
+            "name" : "Book",
+            "description" : "Book"
+        },
+        {
+            "name" : "Borrow",
+            "description" : "Borrow"
+        }
+    ],
+    "paths":{
+        "/Member":{
+            "get":{
+                "tags":[
+                    "Member"
+                ],
+                "summary": "Get All Member",
+                "description":"",
+                "responses":{
+                    "200":{
+                        "description": "Success"
+                    },
+                    "500":{
+                        "description": "Error"
+                    }
+                }
+            },
+            "post":{
+                "tags":[
+                    "Member"
+                ],
+                "summary": "Create Member",
+                "requestBody": {
+                    "required": true,
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "name":{
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
+                            },
+                            "examples":{
+                                "Budi":{
+                                    "value": {
+                                        "name":"Budi"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description":"Success"
+                    },
+                    "400":{
+                        "description": "Error"
+                    }
+                }
+            }
+        },
+        "/member/{memberId}" : {
+            "delete":{
+                "tags":[
+                    "Member"
+                ],
+                "summary": "Delete Member",
+                "parameters":[
+                    {
+                        "name": "memberId",
+                        "in": "path",
+                        "required": true,
+                        "schema":{
+                            "type":"integer"
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description": "Deleted"
+                    },
+                    "404":{
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/Book":{
+            "get":{
+                "tags":[
+                    "Book"
+                ],
+                "summary": "Get All Book",
+                "description":"",
+                "responses":{
+                    "200":{
+                        "description": "Success"
+                    },
+                    "500":{
+                        "description": "Error"
+                    }
+                }
+            },
+            "post":{
+                "tags":[
+                    "Book"
+                ],
+                "summary": "Create Book",
+                "requestBody": {
+                    "required": true,
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "title":{
+                                        "type": "string",
+                                        "required": true
+                                    },
+                                    "author":{
+                                        "type": "string",
+                                        "required": true
+                                    },
+                                    "stock":{
+                                        "type": "boolean",
+                                        "required": true
+                                    }
+                                }
+                            },
+                            "examples":{
+                                "Harry Potter":{
+                                    "value": {
+                                        "title":"Harry Potter",
+                                        "author":"J.K Rowling",
+                                        "stock" : 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description":"Success"
+                    },
+                    "400":{
+                        "description": "Error"
+                    }
+                }
+            }
+        },
+        "/Book/{bookId}" : {
+            "delete":{
+                "tags":[
+                    "Book"
+                ],
+                "summary": "Delete Book",
+                "parameters":[
+                    {
+                        "name": "bookId",
+                        "in": "path",
+                        "required": true,
+                        "schema":{
+                            "type":"integer"
+                        }
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description": "Deleted"
+                    },
+                    "404":{
+                        "description": "Not Found"
+                    },
+                    "400":{
+                        "description": "Error"
+                    }
+                }
+            }
+        },
+        "/Borrow":{
+            "get":{
+                "tags":[
+                    "Borrow"
+                ],
+                "summary": "Get Data Borrow",
+                "description":"",
+                "responses":{
+                    "200":{
+                        "description": "Success"
+                    },
+                    "500":{
+                        "description": "Error"
+                    }
+                }
+            },
+            "post":{
+                "tags":[
+                    "Borrow"
+                ],
+                "summary": "Borrow Book",
+                "requestBody": {
+                    "required": true,
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "name":{
+                                        "type": "string",
+                                        "required": true
+                                    },
+                                    "title":{
+                                        "type": "string",
+                                        "required": true
+                                    },
+                                    "borrowedDate":{
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
+                            },
+                            "examples":{
+                                "Borrow":{
+                                    "value": {
+                                        "name":"Budi",
+                                        "title":"Harry Potter",
+                                        "borrowedDate" : "2023-09-02"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description":"Success"
+                    },
+                    "404":{
+                        "description": "Not Found"
+                    },
+                    "400":{
+                        "description": "Error"
+                    }
+                }
+            }
+        },
+        "/Return" : {
+            "post":{
+                "tags":[
+                    "Borrow"
+                ],
+                "summary": "Return Book",
+                "requestBody": {
+                    "required": true,
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type":"object",
+                                "properties":{
+                                    "name":{
+                                        "type": "string",
+                                        "required": true
+                                    },
+                                    "title":{
+                                        "type": "string",
+                                        "required": true
+                                    },
+                                    "returnDate":{
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
+                            },
+                            "examples":{
+                                "Borrow":{
+                                    "value": {
+                                        "name":"Budi",
+                                        "title":"Harry Potter",
+                                        "returnDate" : "2023-09-05"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                ,
+                "responses":{
+                    "200":{
+                        "description": "Success"
+                    },
+                    "404":{
+                        "description": "Not Found"
+                    },
+                    "400":{
+                        "description": "Error"
+                    }
+                    
+                }
+            }
+        }
+    }
+}
